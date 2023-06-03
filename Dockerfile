@@ -1,5 +1,5 @@
 # Use official node image as the base image
-FROM node:latest as build
+FROM node:14.17.6 as build
 
 # Set the working directory
 WORKDIR /usr/local/app
