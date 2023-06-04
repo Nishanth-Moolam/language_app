@@ -8,7 +8,7 @@ env:
   AWS_REGION: us-east-1
   ECS_CLUSTER: app_cluster
   CONTAINER_NAME: app
-  ECS_SERVICE: app_service
+  ECS_SERVICE: app_service_2
   ECS_TD: .github/workflows/td.json
 
 jobs:
