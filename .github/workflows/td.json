@@ -1,25 +1,28 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-east-1:566365566047:task-definition/app",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:566365566047:task-definition/languageApp",
     "containerDefinitions": [
         {
-            "name": "app",
+            "name": "language",
             "image": "566365566047.dkr.ecr.us-east-1.amazonaws.com/app_repo",
-            "cpu": 256,
-            "memory": 512,
+            "cpu": 0,
             "portMappings": [
                 {
+                    "name": "language-80-tcp",
                     "containerPort": 80,
                     "hostPort": 80,
-                    "protocol": "tcp"
+                    "protocol": "tcp",
+                    "appProtocol": "http"
                 }
             ],
             "essential": true,
             "environment": [],
+            "environmentFiles": [],
             "mountPoints": [],
-            "volumesFrom": []
+            "volumesFrom": [],
+            "ulimits": []
         }
     ],
-    "family": "app",
+    "family": "languageApp",
     "taskRoleArn": "arn:aws:iam::566365566047:role/ecsTaskExecutionRole",
     "executionRoleArn": "arn:aws:iam::566365566047:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
@@ -48,11 +51,15 @@
         "FARGATE"
     ],
     "requiresCompatibilities": [
-        "FARGATE"
+        "EC2"
     ],
-    "cpu": "256",
-    "memory": "512",
-    "registeredAt": "2023-06-03T22:10:59.783Z",
-    "registeredBy": "arn:aws:iam::566365566047:user/languageUser",
+    "cpu": "1024",
+    "memory": "3072",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "registeredAt": "2023-06-05T01:12:09.971Z",
+    "registeredBy": "arn:aws:iam::566365566047:root",
     "tags": []
 }
