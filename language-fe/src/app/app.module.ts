@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeRoutingModule } from './home/home-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import { SocialLoginModule, SocialAuthServiceConfig, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 
 @NgModule({
@@ -19,7 +19,12 @@ import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
     HomeRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    SocialLoginModule
+    SocialLoginModule,
+    GoogleSigninButtonModule
+  ],
+  exports: [
+    SocialLoginModule,
+    GoogleSigninButtonModule
   ],
   providers: [
     {
@@ -30,7 +35,7 @@ import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              'clientId'
+              '1029604165343-bc4vl0t6pkaqtl13d77qm3gh1d44cole.apps.googleusercontent.com'
             )
           }
         ],
