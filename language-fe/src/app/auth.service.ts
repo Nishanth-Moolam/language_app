@@ -12,6 +12,8 @@ export class AuthService {
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this._isLoggedIn$.asObservable();
 
+  baseURL: string = "https://57mejk64tc.execute-api.us-east-1.amazonaws.com"
+
   constructor (
     private http: HttpClient, 
     private socialAuthService: SocialAuthService
@@ -23,6 +25,9 @@ export class AuthService {
   login(token: string): void { 
     localStorage.setItem('token', JSON.stringify(token));
     this._isLoggedIn$.next(!!token);
+    this.http.post(`${this.baseURL}/lesson`, 'test').subscribe((res) => {
+      console.log(res);
+    })
   }
 
   logout(): void {
@@ -32,6 +37,8 @@ export class AuthService {
 
   // Ideally I should do this server side
   decodeToken(token: string): any {
+    // console.log('data')
+    // console.log(jwt_decode(token))
     return jwt_decode(token);
   }
 }

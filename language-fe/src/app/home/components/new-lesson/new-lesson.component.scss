@@ -1,0 +1,15 @@
+.mat-mdc-text-field-wrapper {
+    border-radius: 4px;
+    background-color: lightgray !important;
+    .mdc-floating-label { 
+        color: black !important;
+    }
+}
+
+mat-form-field { 
+    width: 100%;
+}
+
+.description { 
+    padding-bottom: 12px;
+}

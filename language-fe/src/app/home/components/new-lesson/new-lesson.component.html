@@ -1,1 +1,42 @@
-<p>This will contain a form where the user can input a new lesson text</p>
+<div>
+    <div class="row description">
+        <div class="col-md-12">
+            This will contain a form where the user can input a new lesson text
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <mat-form-field appearance="fill">
+                <mat-label>Lesson Name</mat-label>
+                <input matInput>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field>
+                <mat-label>Lesson Language</mat-label>
+                <mat-select>
+                    <mat-option value="one">English</mat-option>
+                    <mat-option value="two">French</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field>
+                <mat-label>Target Language</mat-label>
+                <mat-select>
+                    <mat-option value="one">English</mat-option>
+                    <mat-option value="two">French</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+            <mat-form-field>
+                <mat-label>Lesson Text</mat-label>
+                <textarea matInput rows="10"></textarea>
+            </mat-form-field>
+        </div>
+    </div>
+</div>
