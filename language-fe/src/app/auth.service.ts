@@ -26,7 +26,8 @@ export class AuthService {
   }
 
   logout(): void {
-    //delete token from local storage
+    localStorage.removeItem('token');
+    this._isLoggedIn$.next(false);
   }
 
   // Ideally I should do this server side

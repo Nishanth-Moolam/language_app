@@ -30,6 +30,12 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  logout(): void {
+    this.authService.logout();
+    // this is to move tab back to about after logout
+    window.location.reload();
+  }
+
   // not sure when to use this
   refreshToken(): void {
     this.socialAuthService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);

@@ -1,27 +1,42 @@
 <div>
     <div class="row header" color="primary">
-        <div class="col-md-10 title">
+        <div class="col-md-9 title">
             Language Learning with Nick
         </div>
-        <div class="col-md-2 google-login">
-            <asl-google-signin-button *ngIf="!isLoggedIn; else displayUser" text="signin_with" type="standard" size="medium"
-                theme="filled_blue" logo_alignment="left"></asl-google-signin-button>
-            <ng-template #displayUser>
+        <ng-container *ngIf="isLoggedIn; else login">
+            <div class="col-md-2 google-login">
                 Welcome {{fullName}}!
-            </ng-template>
-        </div>
+            </div>
+            <div class="col-md-1">
+                <button *ngIf="isLoggedIn" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button (click)="logout()" mat-menu-item disabled="false">
+                        <span>Logout</span>
+                    </button>
+                </mat-menu>
+            </div>
+            </ng-container>
+            <ng-template #login>
+                <div class="col-md-3 google-login">
+                    <asl-google-signin-button text="signin_with" type="standard" size="medium" theme="outline"
+                        logo_alignment="left">
+                    </asl-google-signin-button>
+                </div>
+        </ng-template>
     </div>
     <div class="col">
         <div class="row-md-12">
             <mat-tab-group animationDuration="0ms" mat-stretch-tabs="false" mat-align-tabs="start" disableRipple>
                 <mat-tab label="About">
-                    <div class="content">About Section. Instructions on how to effectively use this tool.</div>
+                    <div class="content"><app-about /></div>
                 </mat-tab>
                 <mat-tab label="Upload a Lesson" [disabled]="!isLoggedIn">
-                    <div class="content">This will contain a form where the user can input a new lesson text</div>
+                    <div class="content"><app-new-lesson /></div>
                 </mat-tab>
                 <mat-tab label="Lesson List" [disabled]="!isLoggedIn">
-                    <div class="content">Will contain a list of lessons already created</div>
+                    <div class="content"><app-lesson-list /></div>
                 </mat-tab>
                 <mat-tab label="Contact Me">
                     <div class="content">Contact information</div>

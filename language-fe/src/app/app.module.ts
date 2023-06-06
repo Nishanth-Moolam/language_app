@@ -6,33 +6,27 @@ import { AppComponent } from './app.component';
 import { HomeRoutingModule } from './home/home-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SocialLoginModule, SocialAuthServiceConfig, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
+import { SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { MatTabsModule } from '@angular/material/tabs';
-import { HomeComponent } from './home/components/home/home.component';
 import { AuthService } from './auth.service';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
   ],
   imports: [
     BrowserModule,
+    HomeModule,
     AppRoutingModule,
     HomeRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    SocialLoginModule,
-    GoogleSigninButtonModule,
     NgbModule,
-    MatTabsModule
   ],
   exports: [
-    SocialLoginModule,
-    GoogleSigninButtonModule
   ],
   providers: [
     {

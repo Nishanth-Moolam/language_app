@@ -4,12 +4,13 @@
     padding-left: 12px;
 
     .title {
-        margin: auto;
+        margin: auto 0 auto 0;
         font-size: large;
     }
 
     .google-login {
         margin: auto;
+        width: fit-content;
     }
 }
 
