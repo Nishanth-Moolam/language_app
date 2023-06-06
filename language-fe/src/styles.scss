@@ -1,1 +1,45 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Verdana, "Helvetica Neue", sans-serif;
+}
+
+app-home {
+    mat-tab-header {
+        .mat-mdc-tab-label-container {
+            background-color: white;
+
+            .mat-mdc-tab-list {
+                .mat-mdc-tab-labels {
+                    .mdc-tab {
+                        &.mdc-tab--active {
+                            .mdc-tab__content {
+                                .mdc-tab__text-label {
+                                    color: black;
+                                }
+                            }
+
+                            .mdc-tab-indicator {
+                                .mdc-tab-indicator__content {
+                                    border-color: grey
+                                }
+                            }
+                        }
+
+                        .mdc-tab__content {
+                            .mdc-tab__text-label {
+                                color: black;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

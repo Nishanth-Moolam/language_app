@@ -129,6 +129,8 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+# ds store
+.DS_Store
 
 # Terraform
 terraform

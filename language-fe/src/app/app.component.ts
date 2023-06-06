@@ -1,23 +1,16 @@
-import { SocialAuthService } from '@abacritt/angularx-social-login';
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
   title = 'language-fe';
-  user: any;
-  loggedIn: boolean = false;
 
-  constructor(private authService: SocialAuthService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.authService.authState.subscribe((user) => {
-      this.user = user;
-      this.loggedIn = (user != null);
-      console.log(this.user);
-    });
   }
 }

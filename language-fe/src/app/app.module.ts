@@ -8,10 +8,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SocialLoginModule, SocialAuthServiceConfig, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { MatTabsModule } from '@angular/material/tabs';
+import { HomeComponent } from './home/components/home/home.component';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +26,9 @@ import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
     HttpClientModule,
     BrowserAnimationsModule,
     SocialLoginModule,
-    GoogleSigninButtonModule
+    GoogleSigninButtonModule,
+    NgbModule,
+    MatTabsModule
   ],
   exports: [
     SocialLoginModule,
@@ -43,7 +51,8 @@ import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
           console.error(err);
         }
       } as SocialAuthServiceConfig,
-    }
+    },
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
