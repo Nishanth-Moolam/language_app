@@ -7,8 +7,6 @@ import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 })
 export class HomeService { 
 
-    constructor (
-        private http: HttpClient, 
-        ) {}
+    constructor (private http: HttpClient) {}
 
 }
