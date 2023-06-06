@@ -12,7 +12,8 @@ export class AuthService {
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this._isLoggedIn$.asObservable();
 
-  baseURL: string = "https://57mejk64tc.execute-api.us-east-1.amazonaws.com"
+  // baseURL: string = "https://57mejk64tc.execute-api.us-east-1.amazonaws.com"
+  baseURL: string = "http://localhost:5000"
 
   constructor (
     private http: HttpClient, 
