@@ -5,7 +5,7 @@
         </div>
         <ng-container *ngIf="isLoggedIn; else login">
             <div class="col-md-2 google-login">
-                Welcome {{fullName}}!
+                Welcome {{ fullName }}!
             </div>
             <div class="col-md-1">
                 <button *ngIf="isLoggedIn" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">

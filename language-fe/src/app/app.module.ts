@@ -12,11 +12,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AuthService } from './auth.service';
 import { HomeModule } from './home/home.module';
+import { AuthInterceptorProviders } from './auth.interceptor';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     HomeModule,
@@ -26,8 +25,7 @@ import { HomeModule } from './home/home.module';
     BrowserAnimationsModule,
     NgbModule,
   ],
-  exports: [
-  ],
+  exports: [],
   providers: [
     {
       provide: 'SocialAuthServiceConfig',
@@ -38,16 +36,17 @@ import { HomeModule } from './home/home.module';
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
               '1029604165343-bc4vl0t6pkaqtl13d77qm3gh1d44cole.apps.googleusercontent.com'
-            )
-          }
+            ),
+          },
         ],
         onError: (err) => {
           console.error(err);
-        }
+        },
       } as SocialAuthServiceConfig,
     },
-    AuthService
+    AuthService,
+    AuthInterceptorProviders,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
