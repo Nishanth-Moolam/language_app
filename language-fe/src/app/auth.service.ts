@@ -26,9 +26,7 @@ export class AuthService {
   login(token: string): void { 
     localStorage.setItem('token', JSON.stringify(token));
     this._isLoggedIn$.next(!!token);
-    this.http.post(`${this.baseURL}/lesson`, 'test').subscribe((res) => {
-      console.log(res);
-    })
+    this.http.get<any>(`${this.baseURL}/lesson`).subscribe((data) => console.log(data))
   }
 
   logout(): void {
