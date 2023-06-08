@@ -13,6 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from './auth.service';
 import { HomeModule } from './home/home.module';
 import { AuthInterceptorProviders } from './auth.interceptor';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +25,7 @@ import { AuthInterceptorProviders } from './auth.interceptor';
     HttpClientModule,
     BrowserAnimationsModule,
     NgbModule,
+    FormsModule,
   ],
   exports: [],
   providers: [

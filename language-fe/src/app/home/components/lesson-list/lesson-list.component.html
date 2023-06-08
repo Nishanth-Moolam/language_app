@@ -1,23 +1,32 @@
 <div>
     <div class="row description">
         <div class="col-md-12">
-            This will contain a list of all lessons the user made, with an option to filter by language, and percentage of unknown words
+            This will contain a list of all lessons the user made, with an option to filter by language, and percentage of unknown words. # of lessons: {{ lessonList.length }}
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3 lesson-pane" *ngFor="let i of [1, 2, 3, 4, 5, 1, 2, 3, 4, 5]">
+        <div class="col-md-3 lesson-pane" *ngFor="let lesson of lessonList">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Lesson Name</h5>
+                    <button class="lesson-menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button (click)="deleteLesson(lesson.id?.$oid)" mat-menu-item disabled="false">
+                            <span>Delete</span>
+                        </button>
+                    </mat-menu>
+                    <h5 class="card-title">Title: {{ lesson.title }}</h5>
                     <p class="card-text">
-                        A brief description of the lesson
+                        Description: {{ lesson.description }}
                     </p>
-                    <p>Language</p>
-                    <ul>
+                    <p>Language: {{ lesson.language }}</p>
+                    <p>Visibility: Private</p>
+                    <!-- <ul>
                         <li>known words: 80%</li>
                         <li>unknown words: 15%</li>
                         <li>marked words: 5%</li>
-                    </ul>
+                    </ul> -->
                     <button mat-flat-button>Open Lesson</button>
                 </div>
             </div>

@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -33,16 +34,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatButtonModule,
     MatSelectModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    ReactiveFormsModule,
   ],
   providers: [HomeService],
   exports: [
-    HomeComponent, 
-    AboutComponent, 
-    NewLessonComponent, 
-    LessonListComponent, 
+    HomeComponent,
+    AboutComponent,
+    NewLessonComponent,
+    LessonListComponent,
     SocialLoginModule,
-    GoogleSigninButtonModule
-  ]
+    GoogleSigninButtonModule,
+  ],
 })
-export class HomeModule { }
+export class HomeModule {}

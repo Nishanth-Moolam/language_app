@@ -4,6 +4,25 @@
     .mdc-floating-label { 
         color: black !important;
     }
+
+    textarea, input { 
+        color: black !important;
+    }
+    
+    mat-select { 
+        .mat-mdc-select-trigger { 
+            .mat-mdc-select-value { 
+                .mat-mdc-select-value-text { 
+                    color: black !important;
+                }
+            }
+        }
+    }
+}
+
+.md-button.md-raised.md-primary.formPage:not(.disabledclassname) {
+    color: black !important;
+    background-color:#008cba;    
 }
 
 mat-form-field { 

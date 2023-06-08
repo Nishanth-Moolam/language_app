@@ -1,12 +1,43 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
+import { AuthService } from '../auth.service';
+import { Lesson } from './models/lesson.interface';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
-export class HomeService { 
+export class HomeService {
+  baseURL: string;
 
-    constructor (private http: HttpClient) {}
+  private _lessonList = new BehaviorSubject<Lesson[]>([]);
+  private _tabIndex = new BehaviorSubject<number>(0);
+  lessonList = this._lessonList.asObservable();
+  tabIndex = this._tabIndex.asObservable();
 
+  constructor(private http: HttpClient, private authService: AuthService) {
+    this.baseURL = this.authService.baseURL;
+  }
+
+  setLessonList(lessonList: Lesson[]): Observable<Lesson[]> {
+    this._lessonList.next(lessonList);
+    return this.lessonList;
+  }
+
+  setTabIndex(tabIndex: number): Observable<number> {
+    this._tabIndex.next(tabIndex);
+    return this.tabIndex;
+  }
+
+  postLesson(lesson: Lesson): Observable<any> {
+    return this.http.post<any>(`${this.baseURL}/lesson`, lesson);
+  }
+
+  getLessonList(): Observable<any> {
+    return this.http.get<any>(`${this.baseURL}/lesson`);
+  }
+
+  deleteLesson(id: any): Observable<any> {
+    return this.http.delete<any>(`${this.baseURL}/lesson/${id}`);
+  }
 }

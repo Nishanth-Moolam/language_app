@@ -1,6 +1,8 @@
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth.service';
+import { HomeService } from '../../home.service';
 
 @Component({
   selector: 'app-home',
@@ -11,10 +13,12 @@ import { AuthService } from 'src/app/auth.service';
 export class HomeComponent implements OnInit {
   fullName: string = '';
   isLoggedIn: boolean = false;
+  tabIndex: number = 0;
 
   constructor(
     private socialAuthService: SocialAuthService,
-    private authService: AuthService
+    private authService: AuthService,
+    private homeService: HomeService
   ) {}
 
   ngOnInit(): void {
@@ -33,6 +37,11 @@ export class HomeComponent implements OnInit {
     // on refresh
     this.authService.user.subscribe((user_: any) => {
       this.fullName = user_.name;
+    });
+
+    // check tab index
+    this.homeService.tabIndex.subscribe((tabIndex) => {
+      this.tabIndex = tabIndex;
     });
   }
 
