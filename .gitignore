@@ -134,3 +134,6 @@ dist
 
 # Terraform
 terraform
+
+# pem files
+*.pem
