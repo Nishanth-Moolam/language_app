@@ -21,9 +21,11 @@ export class LessonListComponent implements OnInit {
     this.authService.isLoggedIn$.subscribe((isLoggedIn) => {
       if (isLoggedIn) {
         this.homeService.getLessonList().subscribe((lessons) => {
-          this.homeService.setLessonList(lessons).subscribe((lessonList) => {
-            this.lessonList = lessonList;
-          });
+          this.homeService
+            .setLessonList(JSON.parse(lessons))
+            .subscribe((lessonList) => {
+              this.lessonList = lessonList;
+            });
         });
       }
     });
@@ -32,9 +34,11 @@ export class LessonListComponent implements OnInit {
   deleteLesson(id: any): void {
     this.homeService.deleteLesson(id).subscribe((res) => {
       this.homeService.getLessonList().subscribe((lessons) => {
-        this.homeService.setLessonList(lessons).subscribe((lessonList) => {
-          this.lessonList = lessonList;
-        });
+        this.homeService
+          .setLessonList(JSON.parse(lessons))
+          .subscribe((lessonList) => {
+            this.lessonList = lessonList;
+          });
       });
     });
   }

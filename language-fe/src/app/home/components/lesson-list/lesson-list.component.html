@@ -5,7 +5,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3 lesson-pane" *ngFor="let lesson of lessonList">
+        <div class="col-md-3 lesson-pane" *ngFor="let lesson of lessonList.reverse()">
             <div class="card">
                 <div class="card-body">
                     <button class="lesson-menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">

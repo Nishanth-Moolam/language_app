@@ -24,6 +24,7 @@ db = cluster["languageApp"]
 user_collection = db["user"]
 lesson_collection = db["lesson"]
 word_collection = db["word"]
+sentence_collection = db["sentence"]
 
 # Google Client Configuration
 GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
@@ -110,7 +111,6 @@ def lesson_list():
         # split text into words, leading and trailing remove punctuation
         words = text.split()
         words = [word.lstrip(punctuation).rstrip(punctuation).lower() for word in words]
-        # print (words)
 
         word_ids = []
 
@@ -140,9 +140,20 @@ def lesson_list():
             "user_id": user_id
         }).inserted_id
 
+        # split text into sentences
+        sentences = re.split('(?<=[.!?]) +',text)
+        
+        # create sentences
+        for sentence in sentences:
+            sentence_collection.insert_one({
+                "value": sentence,
+                "language": language,
+                "lesson_id": lesson_id,
+                "translations": ["test translation"]
+            })
+
         # link lesson to user
         user_collection.update_one({"_id": user_id}, {"$push": {"lessons": lesson_id}})
-
 
         return json.dumps({'success':True})
     
@@ -156,6 +167,10 @@ def lesson(lesson_id = None):
         user_id = user_collection.find_one({"email": email})['_id']
 
         if lesson_id is not None:
+
+            # delete sentences
+            sentence_collection.delete_many({"lesson_id": lesson_id})
+
             # delete lesson
             lesson_collection.delete_one({"_id": ObjectId(lesson_id)})
             # remove lesson from user
