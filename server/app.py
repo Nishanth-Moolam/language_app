@@ -12,14 +12,49 @@ import deepl
 import re
 from  string import punctuation
 from bson import json_util, ObjectId
+import boto3
+from botocore.exceptions import ClientError
+
+# ES2 setup
+'''
+
+# AWS Secrets Manager
+def get_secret():
+
+    secret_name = "languageAppSecrets"
+    region_name = "us-east-1"
+
+    # Create a Secrets Manager client
+    session = boto3.session.Session()
+    client = session.client(
+        service_name='secretsmanager',
+        region_name=region_name
+    )
+
+    try:
+        get_secret_value_response = client.get_secret_value(
+            SecretId=secret_name
+        )
+    except ClientError as e:
+        # For a list of exceptions thrown, see
+        # https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+        raise e
+
+    # Decrypts secret using the associated KMS key.
+    secrets = get_secret_value_response['SecretString']
+    return secrets
 
 
 # Environment Variables
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 
+# Secrets
+secrets = json.loads(get_secret())
+
 # Database
-cluster = MongoClient(os.getenv("MONGO_URI"))
+# cluster = MongoClient(os.getenv("MONGO_URI"))
+cluster = MongoClient(secrets['MONGO_URI'])
 db = cluster["languageApp"]
 user_collection = db["user"]
 lesson_collection = db["lesson"]
@@ -27,12 +62,84 @@ word_collection = db["word"]
 sentence_collection = db["sentence"]
 
 # Google Client Configuration
-GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
-GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
+# GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
+# GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
 GOOGLE_DISCOVERY_URL =  "https://accounts.google.com/.well-known/openid-configuration"
 
+GOOGLE_CLIENT_ID = secrets['GOOGLE_CLIENT_ID']
+GOOGLE_CLIENT_SECRET = secrets['GOOGLE_CLIENT_SECRET']
+
+
 # DeepL Translation API
-DEEPL_API_KEY = os.getenv("DEEPL_API_KEY")
+# DEEPL_API_KEY = os.getenv("DEEPL_API_KEY")
+DEEPL_API_KEY = secrets['DEEPL_API_KEY']
+translator = deepl.Translator(DEEPL_API_KEY)
+
+# result = translator.translate_text("Hello, world!", target_lang="FR")
+# print(result.text)  # "Bonjour, le monde !"
+
+'''
+
+# local setup
+'''
+
+'''
+
+# AWS Secrets Manager
+def get_secret():
+
+    secret_name = "languageAppSecrets"
+    region_name = "us-east-1"
+
+    # Create a Secrets Manager client
+    session = boto3.session.Session()
+    client = session.client(
+        service_name='secretsmanager',
+        region_name=region_name
+    )
+
+    try:
+        get_secret_value_response = client.get_secret_value(
+            SecretId=secret_name
+        )
+    except ClientError as e:
+        # For a list of exceptions thrown, see
+        # https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+        raise e
+
+    # Decrypts secret using the associated KMS key.
+    secrets = get_secret_value_response['SecretString']
+    return secrets
+
+
+# Environment Variables
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
+
+# Secrets
+secrets = json.loads(get_secret())
+
+# Database
+# cluster = MongoClient(os.getenv("MONGO_URI"))
+cluster = MongoClient(secrets['MONGO_URI'])
+db = cluster["languageApp"]
+user_collection = db["user"]
+lesson_collection = db["lesson"]
+word_collection = db["word"]
+sentence_collection = db["sentence"]
+
+# Google Client Configuration
+# GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
+# GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
+GOOGLE_DISCOVERY_URL =  "https://accounts.google.com/.well-known/openid-configuration"
+
+GOOGLE_CLIENT_ID = secrets['GOOGLE_CLIENT_ID']
+GOOGLE_CLIENT_SECRET = secrets['GOOGLE_CLIENT_SECRET']
+
+
+# DeepL Translation API
+# DEEPL_API_KEY = os.getenv("DEEPL_API_KEY")
+DEEPL_API_KEY = secrets['DEEPL_API_KEY']
 translator = deepl.Translator(DEEPL_API_KEY)
 
 # result = translator.translate_text("Hello, world!", target_lang="FR")

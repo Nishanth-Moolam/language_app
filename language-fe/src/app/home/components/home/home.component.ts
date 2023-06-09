@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
     //on login
     this.socialAuthService.authState.subscribe((user) => {
       this.authService.login(user.idToken).subscribe((user_) => {
-        this.fullName = JSON.parse(user_).name;
+        this.fullName = user_.name;
       });
     });
 
@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
 
     // on refresh
     this.authService.user.subscribe((user_: any) => {
-      this.fullName = JSON.parse(user_).name;
+      this.fullName = user_.name;
     });
 
     // check tab index

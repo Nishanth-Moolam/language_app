@@ -34,12 +34,12 @@ export class NewLessonComponent implements OnInit {
 
     this.homeService.postLesson(lesson).subscribe((res) => {
       this.homeService.getLessonList().subscribe((lessons) => {
-        this.homeService.setLessonList(JSON.parse(lessons));
+        this.homeService.setLessonList(lessons);
       });
     });
 
     // this.homeService.getLessonList().subscribe((lessons) => {
-    //   this.homeService.setLessonList(JSON.parse(lessons));
+    //   this.homeService.setLessonList(lessons);
     // });
 
     // Reset form
