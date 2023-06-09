@@ -19,7 +19,7 @@ export class AuthService {
   }
 
   // baseURL: string = 'https://57mejk64tc.execute-api.us-east-1.amazonaws.com';
-  baseURL: string = 'http://ec2-18-205-29-237.compute-1.amazonaws.com';
+  baseURL: string = 'https://api.languagelearningwithnick.com';
   // baseURL: string = 'http://localhost:5000';
 
   constructor(
