@@ -27,7 +27,7 @@
                         <li>unknown words: 15%</li>
                         <li>marked words: 5%</li>
                     </ul> -->
-                    <button mat-flat-button>Open Lesson</button>
+                    <button [routerLink]="['lesson/'+lesson.id.$oid]" mat-flat-button>Open Lesson</button>
                 </div>
             </div>
         </div>

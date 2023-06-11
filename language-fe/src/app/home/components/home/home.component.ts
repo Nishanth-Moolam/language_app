@@ -40,6 +40,9 @@ export class HomeComponent implements OnInit {
     // on refresh
     this.authService.user.subscribe((user_: any) => {
       this.fullName = user_.name;
+      this.homeService.getLessonList().subscribe((lessons) => {
+        this.homeService.setLessonList(lessons);
+      });
     });
 
     // check tab index

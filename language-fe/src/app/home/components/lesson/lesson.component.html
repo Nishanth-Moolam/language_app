@@ -1,0 +1,52 @@
+<div class="lesson-page">
+    <div class="row lesson-page-row">
+        <div class="col-md-9 lesson-pane-col">
+            <div class="card lesson-pane">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button mat-flat-button [routerLink]="['/']" (click)="backToLessons()">Back to Lessons</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 word-pane-col">
+            <div class="card word-pane">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="word">Test</div>
+                        </div>
+                    </div>
+                    <div class="row knowledge">
+                        <div class="col-md-12">
+                            <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+                                <mat-button-toggle value="1">1</mat-button-toggle>
+                                <mat-button-toggle value="2">2</mat-button-toggle>
+                                <mat-button-toggle value="3">3</mat-button-toggle>
+                                <mat-button-toggle value="4">4</mat-button-toggle>
+                                <mat-button-toggle value="5">5</mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </div>
+                    </div>
+                    <div class="row translation-list">
+                        <div class="col-md-12">
+                            Translations:
+                            <div class="card translation" *ngFor="let translation of [1, 2, 3, 4, 5]">
+                                <div class="card-body">
+                                    Translation of the Word.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 add-translation">
+                            <button mat-flat-button>Add Translation</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

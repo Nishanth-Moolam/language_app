@@ -1,0 +1,47 @@
+.lesson-page, .lesson-page-row { 
+    height: 100%;
+    width: 100%;
+}
+
+.word-pane { 
+    min-height: 100%;
+}
+
+.word-pane-col, .lesson-pane-col { 
+    padding: 12px;
+}
+
+.lesson-pane { 
+    margin-left: 12px;
+    height: 100%;
+}
+
+.word { 
+    margin: auto;
+    width: fit-content;
+    font-size: larger;
+    font-weight: bolder;
+    margin-bottom: 12px;
+}
+
+mat-button-toggle-group { 
+    width: 100%;
+    mat-button-toggle { 
+        width: 100%;
+        margin: auto;
+    }
+}
+
+.translation-list { 
+    // overflow: scroll;
+    padding-top: 12px;
+}
+
+.translation { 
+    margin: 12px;
+}
+
+.add-translation { 
+    width: fit-content;
+    margin: auto;
+}

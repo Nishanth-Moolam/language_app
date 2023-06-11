@@ -14,8 +14,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { LessonComponent } from './components/lesson/lesson.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AboutComponent,
     NewLessonComponent,
     LessonListComponent,
+    LessonComponent,
   ],
   imports: [
     SocialLoginModule,
@@ -34,8 +37,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     MatSelectModule,
     MatInputModule,
+    MatButtonToggleModule,
     MatFormFieldModule,
     ReactiveFormsModule,
+    RouterModule,
   ],
   providers: [HomeService],
   exports: [
