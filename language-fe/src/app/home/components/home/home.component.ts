@@ -26,6 +26,9 @@ export class HomeComponent implements OnInit {
     this.socialAuthService.authState.subscribe((user) => {
       this.authService.login(user.idToken).subscribe((user_) => {
         this.fullName = user_.name;
+        this.homeService.getLessonList().subscribe((lessons) => {
+          this.homeService.setLessonList(lessons);
+        });
       });
     });
 

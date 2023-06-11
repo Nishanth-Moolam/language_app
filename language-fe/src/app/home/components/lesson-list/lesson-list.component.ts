@@ -20,10 +20,8 @@ export class LessonListComponent implements OnInit {
   ngOnInit(): void {
     this.authService.isLoggedIn$.subscribe((isLoggedIn) => {
       if (isLoggedIn) {
-        this.homeService.getLessonList().subscribe((lessons) => {
-          this.homeService.setLessonList(lessons).subscribe((lessonList) => {
-            this.lessonList = lessonList;
-          });
+        this.homeService.lessonList.subscribe((lessonList) => {
+          this.lessonList = lessonList;
         });
       }
     });

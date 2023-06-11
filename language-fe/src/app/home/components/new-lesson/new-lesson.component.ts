@@ -38,10 +38,6 @@ export class NewLessonComponent implements OnInit {
       });
     });
 
-    // this.homeService.getLessonList().subscribe((lessons) => {
-    //   this.homeService.setLessonList(lessons);
-    // });
-
     // Reset form
     this.form.reset();
 

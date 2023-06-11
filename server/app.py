@@ -54,7 +54,6 @@ load_dotenv(dotenv_path)
 secrets = json.loads(get_secret())
 
 # Database
-# cluster = MongoClient(os.getenv("MONGO_URI"))
 cluster = MongoClient(secrets['MONGO_URI'])
 db = cluster["languageApp"]
 user_collection = db["user"]
@@ -63,16 +62,12 @@ word_collection = db["word"]
 sentence_collection = db["sentence"]
 
 # Google Client Configuration
-# GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
-# GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
 GOOGLE_DISCOVERY_URL =  "https://accounts.google.com/.well-known/openid-configuration"
-
 GOOGLE_CLIENT_ID = secrets['GOOGLE_CLIENT_ID']
 GOOGLE_CLIENT_SECRET = secrets['GOOGLE_CLIENT_SECRET']
 
 
 # DeepL Translation API
-# DEEPL_API_KEY = os.getenv("DEEPL_API_KEY")
 DEEPL_API_KEY = secrets['DEEPL_API_KEY']
 translator = deepl.Translator(DEEPL_API_KEY)
 
@@ -114,6 +109,8 @@ translator = deepl.Translator(DEEPL_API_KEY)
 '''
 
 
+# Setup
+# --------------------------------------------
 
 
 # Environment Variables
@@ -142,6 +139,9 @@ translator = deepl.Translator(DEEPL_API_KEY)
 
 # result = translator.translate_text("Hello, world!", target_lang="FR")
 # print(result.text)  # "Bonjour, le monde !"
+
+
+#--------------------------------------------
 
 # App
 app = Flask(__name__)
