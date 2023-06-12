@@ -8,45 +8,88 @@
                             <button mat-flat-button [routerLink]="['/']" (click)="backToLessons()">Back to Lessons</button>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12 title">
+                            {{ lesson?.title }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 description">
+                            {{ lesson?.description }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 lesson">
+                            <span *ngFor="let word of lesson?.words">
+                                <span class="word-highlight" [ngClass]="{
+                                    'one': word.knowledge === 0,
+                                    'two': word.knowledge === 1,
+                                    'three': word.knowledge === 2,
+                                    'four': word.knowledge === 3,
+                                    'five': word.knowledge === 4
+                                }" (click)="selectWord(word)">{{ word.value }}</span>
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-3 word-pane-col">
+        <div class="col-md-3 word-pane-col" *ngIf="selectedWord; else noWordSelected">
             <div class="card word-pane">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="word">Test</div>
+                            <div class="word">{{ selectedWord.value }}</div>
                         </div>
                     </div>
                     <div class="row knowledge">
                         <div class="col-md-12">
-                            <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-                                <mat-button-toggle value="1">1</mat-button-toggle>
-                                <mat-button-toggle value="2">2</mat-button-toggle>
-                                <mat-button-toggle value="3">3</mat-button-toggle>
-                                <mat-button-toggle value="4">4</mat-button-toggle>
-                                <mat-button-toggle value="5">5</mat-button-toggle>
+                            <mat-button-toggle-group [value]="selectedWord.knowledge" name="fontStyle" aria-label="Font Style">
+                                <mat-button-toggle (click)="changeKnowledgeLevel(selectedWord, 0)" [value]="0">1</mat-button-toggle>
+                                <mat-button-toggle (click)="changeKnowledgeLevel(selectedWord, 1)" [value]="1">2</mat-button-toggle>
+                                <mat-button-toggle (click)="changeKnowledgeLevel(selectedWord, 2)" [value]="2">3</mat-button-toggle>
+                                <mat-button-toggle (click)="changeKnowledgeLevel(selectedWord, 3)" [value]="3">4</mat-button-toggle>
+                                <mat-button-toggle (click)="changeKnowledgeLevel(selectedWord, 4)" [value]="4">5</mat-button-toggle>
                             </mat-button-toggle-group>
                         </div>
                     </div>
                     <div class="row translation-list">
                         <div class="col-md-12">
                             Translations:
-                            <div class="card translation" *ngFor="let translation of [1, 2, 3, 4, 5]">
+                            <div class="card translation" *ngFor="let translation of selectedWord?.translations">
                                 <div class="card-body">
-                                    Translation of the Word.
+                                    {{ translation }}
+                                </div>
+                                <div class="delete-translation">
+                                    <button mat-icon-button (click)="deleteTranslation(translation)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12 add-translation">
-                            <button mat-flat-button>Add Translation</button>
+                    <form [formGroup]="form" (ngSubmit)="addTranslation()">
+                        <div class="row">
+                            <div class="col-md-12 add-translation">
+                                <mat-form-field>
+                                    <mat-label>Add Translation</mat-label>
+                                    <input matInput formControlName="translation">
+                                </mat-form-field>
+                            </div>
                         </div>
-                    </div>
+                        <div class="row">
+                            <div class="col-md-12 add-translation">
+                                <button type="submit" [disabled]="!form.valid" mat-flat-button>Add Translation</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+        <ng-template #noWordSelected>
+            <div class="col-md-3 word-pane-col no-words-selected">
+                Click a word!
+            </div>
+        </ng-template>
     </div>
 </div>

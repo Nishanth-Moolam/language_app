@@ -37,7 +37,29 @@ export class HomeService {
     return this.http.get<any>(`${this.baseURL}/lesson`);
   }
 
+  getLesson(id: any): Observable<any> {
+    return this.http.get<any>(`${this.baseURL}/lesson/${id}`);
+  }
+
   deleteLesson(id: any): Observable<any> {
     return this.http.delete<any>(`${this.baseURL}/lesson/${id}`);
+  }
+
+  changeKnowledge(id: any, knowledge: number): Observable<any> {
+    return this.http.put<any>(`${this.baseURL}/word/knowledge/${id}`, {
+      knowledge,
+    });
+  }
+
+  addTranslation(id: any, translation: string): Observable<any> {
+    return this.http.post<any>(`${this.baseURL}/word/translation/${id}`, {
+      translation,
+    });
+  }
+
+  deleteTranslation(id: any, translation: string): Observable<any> {
+    return this.http.put<any>(`${this.baseURL}/word/translation/${id}`, {
+      translation,
+    });
   }
 }

@@ -18,8 +18,8 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  // baseURL: string = 'http://localhost:5000';
-  baseURL: string = 'https://3f54vwgiwa.execute-api.us-east-1.amazonaws.com';
+  baseURL: string = 'http://localhost:5000';
+  // baseURL: string = 'https://3f54vwgiwa.execute-api.us-east-1.amazonaws.com';
 
   constructor(
     private http: HttpClient,

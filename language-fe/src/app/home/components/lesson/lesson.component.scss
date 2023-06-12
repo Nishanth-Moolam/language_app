@@ -19,9 +19,50 @@
 .word { 
     margin: auto;
     width: fit-content;
-    font-size: larger;
+    font-size: x-large;
     font-weight: bolder;
     margin-bottom: 12px;
+}
+
+.title { 
+    padding: 24px;
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
+.description { 
+    padding-left: 24px;
+    font-size: large;
+}
+
+.lesson { 
+    padding: 24px;
+}
+
+.word-highlight { 
+    border-radius: 4px;
+    padding: 2px;
+    margin: 2px;
+    line-height: 2;
+    cursor: pointer;
+    white-space: nowrap;
+
+    &.one { 
+        background-color: lightblue;
+    }
+    &.two { 
+        background-color: yellow;
+    }
+    &.three { 
+        background-color: lightyellow;
+    }
+    &.four { 
+        // dotted underline
+        text-decoration: underline dotted;
+    }
+    &.five { 
+        background-color: white;
+    }
 }
 
 mat-button-toggle-group { 
@@ -44,4 +85,15 @@ mat-button-toggle-group {
 .add-translation { 
     width: fit-content;
     margin: auto;
+}
+
+.delete-translation { 
+    position: absolute;
+    right: 0;
+}
+
+.no-words-selected { 
+    margin: auto;
+    font-size: x-large;
+    font-weight: bolder;
 }

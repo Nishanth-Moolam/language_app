@@ -1,9 +1,9 @@
 interface Word {
-  id: number;
+  id: any;
   value: string;
   knowledge: number;
   language: string;
-  translation: string[];
+  translations: string[];
 }
 
 export { Word };

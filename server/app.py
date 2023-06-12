@@ -137,7 +137,7 @@ GOOGLE_DISCOVERY_URL =  "https://accounts.google.com/.well-known/openid-configur
 DEEPL_API_KEY = os.getenv("DEEPL_API_KEY")
 translator = deepl.Translator(DEEPL_API_KEY)
 
-# result = translator.translate_text("Hello, world!", target_lang="FR")
+# result = translator.translate_text("Bonjour, le monde !", target_lang="EN-US")
 # print(result.text)  # "Bonjour, le monde !"
 
 
@@ -213,17 +213,14 @@ def lesson_list():
             request.json['text']
             )
 
-        # split text into words, leading and trailing remove punctuation
-        words = text.split()
-        words = [word.lstrip(punctuation).rstrip(punctuation).lower() for word in words]
+        # split text into words
+        words = re.findall(r"[\w']+|[.,!?;]", text)
 
         word_ids = []
-
         # create words if not exist, and get word ids
         for word in words:
-            find_word = word_collection.find_one({"value": word, "language": language, "user": user_id})
+            find_word = word_collection.find_one({"value": word, "language": language, "user_id": ObjectId(user_id)})
             if find_word is None:
-                # print ("New Word Created")
                 word_id = word_collection.insert_one({
                     "value": word, 
                     "language": language, 
@@ -262,7 +259,10 @@ def lesson_list():
 
         return json.dumps({'success':True})
     
-@app.route('/lesson/<lesson_id>', methods=['DELETE'])
+'''
+Note: the lesson id is a string
+'''
+@app.route('/lesson/<lesson_id>', methods=['DELETE', 'GET'])
 def lesson(lesson_id = None):
     if request.method == 'DELETE':
         token = request.headers.get('Authorization').strip("\"") 
@@ -274,7 +274,7 @@ def lesson(lesson_id = None):
         if lesson_id is not None:
 
             # delete sentences
-            sentence_collection.delete_many({"lesson_id": lesson_id})
+            sentence_collection.delete_many({"lesson_id": ObjectId(lesson_id)})
 
             # delete lesson
             lesson_collection.delete_one({"_id": ObjectId(lesson_id)})
@@ -283,7 +283,93 @@ def lesson(lesson_id = None):
             return json.dumps({'success':True})
         else:
             return json.dumps({'success':False})
+        
+    elif request.method == 'GET':
+        token = request.headers.get('Authorization').strip("\"") 
+        idinfo = id_token.verify_oauth2_token(token, requests.Request(), GOOGLE_CLIENT_ID)
 
+        email = idinfo['email']
+        user_id = user_collection.find_one({"email": email})['_id']
+
+        if lesson_id is not None:
+            lesson = lesson_collection.find_one({"_id": ObjectId(lesson_id)})
+
+            # get words
+            words = []
+            for word_id in lesson['word_ids']:
+                word = word_collection.find_one({"_id": word_id})
+                words.append({
+                    "id": word_id,
+                    "value": word['value'],
+                    "translations": word['translations'],
+                    "knowledge": word['knowledge']
+                })
+
+            # get sentences
+            sentences = []
+            for sentence in sentence_collection.find({"lesson_id": ObjectId(lesson_id)}):
+                sentences.append({
+                    "id": sentence['_id'],
+                    "value": sentence['value'],
+                    "translations": sentence['translations']
+                })
+
+            lesson_data = {
+                "id": lesson['_id'],
+                "language": lesson['language'],
+                "description": lesson['description'],
+                "title": lesson['title'],
+                "words": words,
+                "sentences": sentences
+            }
+
+            return json_util.dumps(lesson_data)
+        else:
+            return json.dumps({'success':False})
+        
+
+@app.route('/word/knowledge/<word_id>', methods=['PUT'])
+def word_knowledge(word_id = None):
+    if request.method == 'PUT':
+
+        if word_id is not None:
+            word = word_collection.find_one({"_id": ObjectId(word_id)})
+            word_collection.update_one({"_id": ObjectId(word_id)}, {"$set": {"knowledge": request.json['knowledge']}})
+            return json.dumps({'success':True})
+        else:
+            return json.dumps({'success':False})
+
+'''
+The put call is actually a delete call, but I used put because I didn't want to deal with the body
+'''
+@app.route('/word/translation/<word_id>', methods=['POST', 'PUT'])
+def word_translation(word_id = None):
+    if request.method == 'POST':
+
+        if word_id is not None:
+            word_collection.update_one({"_id": ObjectId(word_id)}, {"$push": {"translations": request.json['translation']}})
+            word = word_collection.find_one({"_id": ObjectId(word_id)})
+            return json_util.dumps({
+                "id": word['_id'],
+                "value": word['value'],
+                "translations": word['translations'],
+                "knowledge": word['knowledge']
+            })
+        else:
+            return json.dumps({'success':False})
+    elif request.method == 'PUT':
+            
+            if word_id is not None:
+                word_collection.update_one({"_id": ObjectId(word_id)}, {"$pull": {"translations": request.json['translation']}})
+                word = word_collection.find_one({"_id": ObjectId(word_id)})
+                return json_util.dumps({
+                    "id": word['_id'],
+                    "value": word['value'],
+                    "translations": word['translations'],
+                    "knowledge": word['knowledge']
+                })
+            else:
+                return json.dumps({'success':False})
 
 if __name__ == '__main__':
    app.run(debug=True)
