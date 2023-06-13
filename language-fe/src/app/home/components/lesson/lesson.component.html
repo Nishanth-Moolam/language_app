@@ -79,7 +79,7 @@
                             </div>
                         </div>
                     </div>
-                    <form [formGroup]="form" (ngSubmit)="addTranslation()">
+                    <form *ngIf="view === 'words'" [formGroup]="form" (ngSubmit)="addTranslation()">
                         <div class="row">
                             <div class="col-md-12 add-translation">
                                 <mat-form-field>
