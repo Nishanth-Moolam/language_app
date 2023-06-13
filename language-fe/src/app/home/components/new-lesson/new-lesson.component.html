@@ -1,9 +1,9 @@
 <div>
-    <div class="row description">
+    <!-- <div class="row description">
         <div class="col-md-12">
             This will contain a form where the user can input a new lesson text
         </div>
-    </div>
+    </div> -->
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="row">
@@ -17,7 +17,7 @@
                 <mat-form-field>
                     <mat-label>Lesson Language</mat-label>
                     <mat-select formControlName="lessonLanguage">
-                        <mat-option value="english">English</mat-option>
+                        <!-- <mat-option value="english">English</mat-option> -->
                         <mat-option value="french">French</mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -25,9 +25,9 @@
             <div class="col-md-3">
                 <mat-form-field>
                     <mat-label>Native Language</mat-label>
-                    <mat-select formControlName="nativeLanguage">
+                    <mat-select [(value)]="selectedLang" formControlName="nativeLanguage">
                         <mat-option value="english">English</mat-option>
-                        <mat-option value="french">French</mat-option>
+                        <!-- <mat-option value="french">French</mat-option> -->
                     </mat-select>
                 </mat-form-field>
             </div>

@@ -224,7 +224,7 @@ def lesson_list():
                 word_id = word_collection.insert_one({
                     "value": word, 
                     "language": language, 
-                    "translations": ["test translation"], 
+                    "translations": [translator.translate_text(word, target_lang="EN-US", source_lang="FR").text], 
                     "user_id": user_id,
                     "knowledge": 0
                     }).inserted_id
@@ -251,7 +251,7 @@ def lesson_list():
                 "value": sentence,
                 "language": language,
                 "lesson_id": lesson_id,
-                "translations": ["test translation"]
+                "translations": [translator.translate_text(sentence, target_lang="EN-US", source_lang="FR").text]
             })
 
         # link lesson to user

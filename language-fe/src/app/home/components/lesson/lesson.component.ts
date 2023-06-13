@@ -13,6 +13,7 @@ export class LessonComponent implements OnInit {
   lesson: any;
   selectedWord: Word | null = null;
   form: FormGroup;
+  view: string = 'words';
 
   constructor(
     private fb: FormBuilder,
@@ -34,6 +35,11 @@ export class LessonComponent implements OnInit {
         this.lesson = lesson;
         // console.log(this.lesson);
       });
+  }
+
+  viewToggle(view: string): void {
+    this.view = view;
+    this.selectedWord = null;
   }
 
   backToLessons(): void {

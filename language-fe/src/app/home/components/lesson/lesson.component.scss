@@ -16,12 +16,20 @@
     height: 100%;
 }
 
+.view-toggle { 
+    position: absolute;
+    width: 200px;
+    right: 0;
+    margin-right: 24px;
+}
+
 .word { 
     margin: auto;
     width: fit-content;
     font-size: x-large;
     font-weight: bolder;
     margin-bottom: 12px;
+    line-height: 1.2;
 }
 
 .title { 
@@ -80,6 +88,10 @@ mat-button-toggle-group {
 
 .translation { 
     margin: 12px;
+}
+
+.translation-text { 
+    margin-right: 24px;
 }
 
 .add-translation { 

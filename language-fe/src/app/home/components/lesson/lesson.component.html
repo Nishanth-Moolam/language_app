@@ -6,6 +6,10 @@
                     <div class="row">
                         <div class="col-md-12">
                             <button mat-flat-button [routerLink]="['/']" (click)="backToLessons()">Back to Lessons</button>
+                            <mat-button-toggle-group class="view-toggle" [value]="view" name="fontStyle" aria-label="Font Style">
+                                <mat-button-toggle (click)="viewToggle('words')" value="words">Words</mat-button-toggle>
+                                <mat-button-toggle (click)="viewToggle('sentences')" value="sentences">Sentences</mat-button-toggle>
+                            </mat-button-toggle-group>
                         </div>
                     </div>
                     <div class="row">
@@ -18,7 +22,7 @@
                             {{ lesson?.description }}
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" *ngIf="view === 'words'">
                         <div class="col-md-12 lesson">
                             <span *ngFor="let word of lesson?.words">
                                 <span class="word-highlight" [ngClass]="{
@@ -28,6 +32,13 @@
                                     'four': word.knowledge === 3,
                                     'five': word.knowledge === 4
                                 }" (click)="selectWord(word)">{{ word.value }}</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="view === 'sentences'">
+                        <div class="col-md-12 lesson">
+                            <span *ngFor="let sentence of lesson?.sentences">
+                                <span class="word-highlight three" (click)="selectWord(sentence)">{{ sentence.value }}</span>
                             </span>
                         </div>
                     </div>
@@ -42,7 +53,7 @@
                             <div class="word">{{ selectedWord.value }}</div>
                         </div>
                     </div>
-                    <div class="row knowledge">
+                    <div class="row knowledge" *ngIf="view === 'words'">
                         <div class="col-md-12">
                             <mat-button-toggle-group [value]="selectedWord.knowledge" name="fontStyle" aria-label="Font Style">
                                 <mat-button-toggle (click)="changeKnowledgeLevel(selectedWord, 0)" [value]="0">1</mat-button-toggle>
@@ -57,7 +68,7 @@
                         <div class="col-md-12">
                             Translations:
                             <div class="card translation" *ngFor="let translation of selectedWord?.translations">
-                                <div class="card-body">
+                                <div class="card-body translation-text">
                                     {{ translation }}
                                 </div>
                                 <div class="delete-translation">
@@ -88,7 +99,7 @@
         </div>
         <ng-template #noWordSelected>
             <div class="col-md-3 word-pane-col no-words-selected">
-                Click a word!
+                Click a word or Sentence!
             </div>
         </ng-template>
     </div>

@@ -12,7 +12,7 @@ import {
 export class AuthService {
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this._isLoggedIn$.asObservable();
-  user: Observable<any> = of({});
+  user: Observable<any> = of(null);
 
   get token() {
     return localStorage.getItem('token');
@@ -43,7 +43,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('token');
     this._isLoggedIn$.next(false);
-    this.socialAuthService.signOut();
+    // this.socialAuthService.signOut();
     this.user = of({});
   }
 

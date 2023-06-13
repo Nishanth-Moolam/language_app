@@ -11,13 +11,14 @@ import { HomeService } from '../../home.service';
 })
 export class NewLessonComponent implements OnInit {
   form: FormGroup;
+  selectedLang = 'english';
 
   constructor(private fb: FormBuilder, private homeService: HomeService) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
       lessonName: ['', Validators.required],
-      lessonLanguage: ['', Validators.required],
+      lessonLanguage: [''],
       nativeLanguage: ['', Validators.required],
       description: ['', Validators.required],
       lessonText: ['', Validators.required],

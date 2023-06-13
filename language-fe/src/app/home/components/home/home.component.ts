@@ -25,10 +25,12 @@ export class HomeComponent implements OnInit {
     //on login
     this.socialAuthService.authState.subscribe((user) => {
       this.authService.login(user.idToken).subscribe((user_) => {
-        this.fullName = user_.name;
-        this.homeService.getLessonList().subscribe((lessons) => {
-          this.homeService.setLessonList(lessons);
-        });
+        if (user_) {
+          this.fullName = user_.name;
+          this.homeService.getLessonList().subscribe((lessons) => {
+            this.homeService.setLessonList(lessons);
+          });
+        }
       });
     });
 
@@ -39,10 +41,12 @@ export class HomeComponent implements OnInit {
 
     // on refresh
     this.authService.user.subscribe((user_: any) => {
-      this.fullName = user_.name;
-      this.homeService.getLessonList().subscribe((lessons) => {
-        this.homeService.setLessonList(lessons);
-      });
+      if (user_) {
+        this.fullName = user_.name;
+        this.homeService.getLessonList().subscribe((lessons) => {
+          this.homeService.setLessonList(lessons);
+        });
+      }
     });
 
     // check tab index
@@ -53,7 +57,6 @@ export class HomeComponent implements OnInit {
 
   logout(): void {
     this.authService.logout();
-    // this is to move tab back to about after logout
-    window.location.reload();
+    this.homeService.setTabIndex(0);
   }
 }
