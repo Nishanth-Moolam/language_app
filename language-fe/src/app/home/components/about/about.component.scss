@@ -2,6 +2,33 @@
     font-size: larger;
     line-height: 1.5;
     padding: 36px;
+    border-radius: 20px;
+    margin-top: 6%;
+    margin-bottom: 6%;
+
+    &.yellow { 
+        background-color: #F1F7B5
+    }
+
+    &.green { 
+        background-color: #A8D1D1
+    }
+
+    &.blue { 
+        background-color: #A8B9D1
+    }
+
+    &.pink { 
+        background-color: #F1B5C4
+    }
+
+    &.purple { 
+        background-color: #D1A8D1
+    }
+
+    &.orange { 
+        background-color: #F1C4B5
+    }
 }
 
 .form-image { 

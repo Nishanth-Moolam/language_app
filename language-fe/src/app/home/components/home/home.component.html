@@ -7,15 +7,16 @@
             <div class="col-md-2 google-login">
                 Welcome {{ fullName }}!
             </div>
-            <div class="col-md-1">
-                <button *ngIf="isLoggedIn" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <div class="col-md-1 google-login">
+                <span class="logout-button" (click)="logout()">Logout</span>
+                <!-- <button *ngIf="isLoggedIn" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                     <mat-icon>more_vert</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu">
                     <button (click)="logout()" mat-menu-item disabled="false">
                         <span>Logout</span>
                     </button>
-                </mat-menu>
+                </mat-menu> -->
             </div>
             </ng-container>
             <ng-template #login>

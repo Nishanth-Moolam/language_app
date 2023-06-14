@@ -1,18 +1,23 @@
 .header {
-    height: 50px;
-    background-color: lightgray;
+    height: 75px;
+    // background-color: lightgray;
+    background-color: cornflowerblue;
     width: 100%;
     margin: 0;
 
     .title {
         margin: auto 0 auto 0;
-        font-size: large;
+        font-size: x-large;
     }
 
     .google-login {
         margin: auto;
         width: fit-content;
         overflow: hidden;
+    }
+
+    .logout-button { 
+        cursor: pointer;
     }
 }
 
